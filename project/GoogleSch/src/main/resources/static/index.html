@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Test</title>
+</head>
+<body>
+<h1>Search Test</h1>
+<form id="searchForm">
+    <input type="text" id="keyword" placeholder="검색어를 입력하세요">
+    <button type="submit">검색</button>
+</form>
+
+<script>
+    document.getElementById("searchForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // 폼 기본 제출 동작 방지
+
+        var keyword = document.getElementById("keyword").value;
+        var url = "http://localhost:8080/searches/crawl/" + encodeURIComponent(keyword);
+
+        fetch(url, { method: "GET" })
+            .then(function(response) {
+                if (response.ok) {
+                    console.log("요청이 성공적으로 전송되었습니다.");
+                    // 여기에서 추가적인 동작을 수행할 수 있습니다.
+                } else {
+                    console.log("요청 전송 중 오류가 발생하였습니다.");
+                }
+            })
+            .catch(function(error) {
+                console.log("요청 전송 중 오류가 발생하였습니다:", error);
+            });
+    });
+</script>
+</body>
+</html>
